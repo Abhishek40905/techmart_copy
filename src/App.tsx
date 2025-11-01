@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import About from "./components/About";
 import Events from "./components/Events";
+import Team from "./components/Team";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
           {/* <Route path="/team" element = {<} */}
           <Route path="/events" element = {<Events/>}/>
+          <Route path="/team" element = {<Team/>}/>
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

@@ -1,44 +1,51 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
+import Navbar from "./Navbar";
 
 const About = () => {
   const ref = useRef(null);
-  const [menuOpen, setMenuOpen] = useState(false);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  // 🧠 Top Management
-  const topManagement = [
-    { name: "Nikil", role: "IT", image: "/images/organizers/nikhil.jpeg" },
-    { name: "Shikhar Dwivedi", role: "CSE", image: "/images/organizers/shikhar.jpeg" },
-    { name: "Jatin Gupta", role: "MCA", image: "/images/organizers/jatin.jpeg" }
-  ];
+  const sections = [
+    {
+      title: "About TechMart",
+      image: null,
+      text: `“TECHMART 2025” is the Annual Technical Fest of University Institute of Engineering and 
+Technology (UIET), CSJMU Kanpur, organized with the vision to encourage innovation, technical excellence, and interdisciplinary collaboration among students.
 
-  // 👥 Organizing Members
-  const organizingTeam = [
-    { name: "Vishal Singh", role: "ECE", image: "/images/organizers/vishal.jpeg" },
-    { name: "Nav Srijan", role: "CSE-AI", image: "/images/organizers/nav.jpeg" },
-    { name: "Mohd Athar", role: "B.Design", image: "/images/organizers/athar.jpeg" },
-    { name: "Shivam Pal", role: "CHE", image: "/images/organizers/shivam.jpeg" },
-    { name: "Shivani Shukla", role: "IT", image: "/images/organizers/shivani.jpeg" },
-    { name: "Divyaraaj Tomar", role: "MEE", image: "/images/organizers/divyaraaj.jpeg" },
-    { name: "Sanskriti Srivastava", role: "B.Voc", image: "/images/organizers/sanskriti.jpeg" }
-  ];
+This two-day celebration of technology and creativity aims to bringhow to keep a string as it is  together students from all departments to showcase their technical skills, present innovations, and participate in intellectually stimulating events.
 
-  const menuItems = [
-    { name: "Institutions", id: "/#institutions" },
-    { name: "Sponsors", id: "/#sponsors" },
-    { name: "Competitions", id: "/#competitions" },
-    { name: "Schedule", id: "/#schedule" },
-    { name: "About", id: "/about" },
+Objectives:
+• To promote technical innovation and hands-on learning among students. 
+• To encourage cross-department collaboration and idea exchange. 
+• To provide a platform for showcasing projects, models, and creative ideas. 
+• To strengthen industry-academia engagement through exposure and participation. 
+• To foster a culture of technology-driven problem-solving.`,
+    },
+    {
+      title: "About CSJMU",
+      image: "/images/csjm.jpeg",
+      text: `Chhatrapati Shahu Ji Maharaj University (CSJMU), Kanpur, is a leading institution of higher education in Uttar Pradesh, named after the great social reformer Rajarshi Shahu Maharaj. The university fosters an inclusive learning environment that encourages innovation, knowledge, and holistic development.
+
+Guided by the visionary ideals of Shahu Maharaj—who championed education, equality, and social reform—CSJMU stands as a symbol of progress and empowerment. From free primary education to promoting women’s rights and modernizing agriculture, his legacy continues to inspire generations.
+
+Today, CSJMU continues this tradition by nurturing talent, promoting research, and shaping responsible global citizens.`,
+    },
+    {
+      title: "About UIET",
+      image: "/images/uiet.jpeg",
+      text: `The University Institute of Engineering and Technology (UIET), a flagship institute of CSJM University Kanpur, is dedicated to advancing technical education and innovation. Located on the lush 264-acre campus, UIET offers B.Tech programs in five major branches along with MCA, PG Diploma, and vocational courses.
+
+With academic autonomy, an industry-aligned curriculum, and highly qualified faculty, UIET fosters innovation, entrepreneurship, and holistic student growth through academics, research, and cultural engagement.`,
+    },
   ];
 
   return (
-    <section ref={ref} className="relative py-32 overflow-hidden" id="about">
-      {/* 🌈 Animated Gradient Background */}
+    <section ref={ref} className="relative py-32 overflow-hidden bg-background text-foreground" id="about">
+      {/* 🌈 Background Effects */}
       <div className="absolute inset-0 bg-gradient-mesh opacity-40" />
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-none">
         {[...Array(6)].map((_, i) => (
           <motion.div
             key={i}
@@ -58,152 +65,53 @@ const About = () => {
         ))}
       </div>
 
-      {/* 🧭 Navbar */}
-      <div className="absolute top-4 left-0 right-0 flex justify-between items-center px-6 z-20">
-        <h2 className="font-audiowide text-2xl sm:text-3xl text-primary drop-shadow-lg">
-          <a href="/">TechMart</a>
-        </h2>
+      <Navbar />
 
-        {/* Mobile Menu Toggle */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden p-2 rounded-lg bg-background/50 backdrop-blur-lg border border-primary/20 hover:bg-background/70 transition"
-        >
-          {menuOpen ? <X className="w-6 h-6 text-primary" /> : <Menu className="w-6 h-6 text-primary" />}
-        </button>
-
-        {/* Desktop Menu */}
-        <nav className="hidden md:flex gap-8 text-lg font-orbitron text-foreground/90">
-          {menuItems.map((item) => (
-            <a
-              key={item.id}
-              href={item.id}
-              className="hover:text-primary transition-colors"
-            >
-              {item.name}
-            </a>
-          ))}
-        </nav>
-      </div>
-
-      {/* 📱 Mobile Menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            className="absolute top-16 left-4 right-4 z-20 bg-background/80 backdrop-blur-lg border border-primary/20 rounded-2xl p-6 shadow-lg md:hidden"
-          >
-            <ul className="flex flex-col items-center gap-4 text-lg font-orbitron text-foreground">
-              {menuItems.map((item) => (
-                <li key={item.id}>
-                  <a
-                    href={item.id}
-                    className="hover:text-primary transition-colors"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* 🧾 Main Content */}
-      <div className="relative container mx-auto px-6 text-center">
-        {/* Section Headers */}
-        {[
-          {
-            title: "About TechMart",
-            text: `TechMart is not just a fest — it's a multidimensional experience blending innovation, imagination, and inspiration. Dive into a world of futuristic technology, artistic brilliance, and boundless creativity.`,
-          },
-          {
-            title: "About CSJMU",
-            text: `Chhatrapati Shahu Ji Maharaj University (CSJMU), formerly Kanpur University, is a major public state university in Uttar Pradesh, established in 1966. It serves as an affiliating body for hundreds of colleges, offering over 400 courses across disciplines, recognized by UGC.`,
-          },
-          {
-            title: "About UIET",
-            text: `The University Institute of Engineering and Technology (UIET), established in 1996, is CSJMU’s flagship engineering college. Offering B.Tech, MCA, and Diploma programs, UIET fosters innovation and excellence through world-class education and research.`,
-          },
-        ].map((section, index) => (
+      <div className="relative container mx-auto px-6">
+        {sections.map((section, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: index * 0.15 }}
-            className="mb-24 max-w-5xl mx-auto"
+            transition={{ duration: 0.8, delay: index * 0.2 }}
+            className={`flex flex-col items-center gap-12 mb-32 text-center`}
           >
-            <h2 className="text-5xl md:text-7xl font-orbitron mb-6 gradient-text">
-              {section.title}
-            </h2>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-              {section.text}
-            </p>
+            {/* 🖼️ Optional Image */}
+            {section.image && (
+              <div className="w-full md:w-1/2">
+                <img
+                  src={section.image}
+                  alt={section.title}
+                  className="rounded-3xl shadow-2xl w-full object-cover object-top hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+            )}
+
+            {/* 📝 Text Section */}
+             <h2 className="text-5xl md:text-6xl font-orbitron mb-8 gradient-text text-center">
+                {section.title}
+              </h2>
+            <div
+              className={`${
+                section.image ? "w-full md:w-1/2" : "max-w-4xl mx-auto text-left md:text-center"
+              }`}
+            >
+             
+
+              {section.title === "About TechMart" ? (
+                <div className="bg-background/40 backdrop-blur-md rounded-2xl p-8 md:p-12 shadow-lg border border-primary/20">
+                  <pre className="whitespace-pre-wrap text-lg md:text-xl text-muted-foreground leading-relaxed font-sans text-left">
+                    {section.text}
+                  </pre>
+                </div>
+              ) : (
+                <pre className="text-lg md:text-xl text-muted-foreground leading-relaxed whitespace-pre-wrap font-sans">
+                  {section.text}
+                </pre>
+              )}
+            </div>
           </motion.div>
         ))}
-
-        {/* 🧠 Organizers */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-24"
-        >
-          <h3 className="text-4xl md:text-5xl font-orbitron mb-10 gradient-text">Organizers</h3>
-          <div className="flex flex-wrap justify-center gap-10">
-            {topManagement.map((member, index) => (
-              <motion.div
-                key={member.name}
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 200 }}
-                className="text-center w-64"
-              >
-                <div className="relative overflow-hidden rounded-2xl border border-border shadow-lg hover:shadow-glow-cyan transition-all duration-300">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-72 object-cover object-top rounded-2xl"
-                  />
-                </div>
-                <h4 className="text-2xl font-semibold mt-4 text-foreground">{member.name}</h4>
-                <p className="text-muted-foreground">{member.role}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* 👥 Organizing Members */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="mb-24"
-        >
-          <h3 className="text-4xl md:text-5xl font-orbitron mb-10 gradient-text">Team Members</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-10 justify-items-center">
-            {organizingTeam.map((member, index) => (
-              <motion.div
-                key={member.name}
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 200 }}
-                className="text-center"
-              >
-                <div className="relative overflow-hidden rounded-2xl border border-border shadow-lg hover:shadow-glow-cyan transition-all duration-300">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-64 object-cover object-top rounded-2xl"
-                  />
-                </div>
-                <h4 className="text-xl font-semibold mt-4 text-foreground">{member.name}</h4>
-                <p className="text-muted-foreground">{member.role}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

@@ -1,348 +1,446 @@
-import React, { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
-import { Menu, X, Code, Zap, ShieldCheck, BookOpen, Activity, Sparkles } from "lucide-react";
+import { useState } from "react";
+import {
+  Code,
+  Zap,
+  ShieldCheck,
+  Sparkles,
+  BookOpen,
+  FlaskConical,
+  Activity,
+  X,
+} from "lucide-react";
+import Navbar from "./Navbar";
+
+interface EventHead {
+  name: string;
+  contact: string;
+}
 
 interface Event {
   title: string;
   description: string;
-  format: string;
+  icon: string;
   duration: string;
-  platform?: string;
+  format: string;
+  poster: string;
   scoring: string[];
   rules: string[];
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-  color: string;
-  glow?: string;
+  platform: string;
+  entry_fee: string;
+  prizes: string[];
+  event_head: EventHead;
 }
 
-const EVENTS: Event[] = [
+interface Category {
+  category_title: string;
+  events: Event[];
+}
+
+const iconMap = {
+  Code,
+  Zap,
+  ShieldCheck,
+  Sparkles,
+  BookOpen,
+  FlaskConical,
+  Activity,
+};
+
+const eventData: Category[] = [
   {
-    title: "AlgoRift (Programming Contest)",
-    description:
-      "A 3-hour ICPC-style competitive coding round — algorithmic problems, speed & accuracy matter.",
-    format: "Individual",
-    duration: "3 hours",
-    platform: "CodeChef / Codeforces / Self-hosted",
-    scoring: [
-      "Problems with varying difficulty and point values",
-      "Based on number of correct solves",
-      "Time (faster solves score higher in tie-breaks)",
-      "Ties broken by fewer incorrect submissions",
-    ],
-    rules: [
-      "No pre-written templates / code snippets",
-      "Internet restricted to contest platform & official docs",
-      "Plagiarism or collaboration = disqualification",
-      "Mimics ICPC-style rules",
-    ],
-    icon: Code,
-    color: "from-cyan-500 to-blue-500",
-    glow: "shadow-glow-cyan",
+    category_title: "Programming & Tech",
+    events: [
+      {
+        title: "CPCT (Coding Competition)",
+        description:
+          "A programming challenge to test your coding logic, speed, and problem-solving accuracy.",
+        icon: "Code",
+        duration: "3 hours",
+        format: "Individual",
+        platform: "Online / Code Platform",
+        entry_fee: "₹49",
+        poster: "/images/events/cp_poster.jpeg",
+        scoring: [
+          "Based on number of correct solutions",
+          "Time and accuracy used as tie-breakers"
+        ],
+        rules: [
+          "No plagiarism or collaboration allowed",
+          "Internet restricted to official platform",
+          "Violation of rules leads to disqualification"
+        ],
+        prizes: ["₹2000 or exciting goodies"],
+        event_head: {
+          name: "Tushar Singh",
+          contact: "9935738343"
+        }
+      },
+      {
+        title: "Web Dev Contest",
+        description:
+          "A creative web development challenge where teams design functional, theme-based websites.",
+        icon: "Zap",
+        duration: "5 hours (3h build + 2h showcase)",
+        format: "Teams of 3–4",
+        platform: "Local / Browser-based",
+        entry_fee: "₹49",
+        poster: "/images/events/typing_poster.jpeg",
+        scoring: [
+          "Creativity and originality",
+          "Theme resemblance and responsiveness",
+          "Functionality and visual polish"
+        ],
+        rules: [
+          "Theme revealed at start of event",
+          "AI tools and internet allowed",
+          "Copied or template-based work leads to disqualification"
+        ],
+        prizes: ["₹2000 or exciting goodies"],
+        event_head: {
+          name: "Ayushi Chaudhary",
+          contact: "9118886404"
+        }
+      },
+      {
+        title: "CipherConquest (CTF Challenge)",
+        description:
+          "Capture-the-Flag event where players solve cybersecurity puzzles to earn points.",
+        icon: "ShieldCheck",
+        duration: "3 hours",
+        format: "Individual",
+        platform: "CTFd Platform",
+        entry_fee: "Free",
+        poster: "/images/events/cipher_conquest.jpeg",
+        scoring: [
+          "Number of flags solved",
+          "Time-based ranking for tie-breaks"
+        ],
+        rules: [
+          "Flag sharing strictly prohibited",
+          "Respectful environment mandatory",
+          "Report unintended vulnerabilities to organizers"
+        ],
+        prizes: ["₹2000 or exciting goodies"],
+        event_head: {
+          name: "Aman Singh",
+          contact: "9039308629"
+        }
+      },
+      {
+        title: "TypeMatrix",
+        description:
+          "A typing speed and accuracy contest to test precision under time pressure.",
+        icon: "Activity",
+        duration: "1 hour (including setup)",
+        format: "Individual",
+        platform: "Official Techmart Typing Platform",
+        entry_fee: "₹49",
+        poster: "/images/events/typing_poster.jpeg",
+        scoring: [
+          "Final Score = (WPM × Accuracy) / 100",
+          "Higher accuracy wins tie-breakers"
+        ],
+        rules: [
+          "Only registered participants allowed",
+          "External typing tools/scripts prohibited",
+          "Plagiarism or tab switching = disqualification"
+        ],
+        prizes: [
+          "1st Prize – ₹2000 or exciting goodies",
+          "2nd Prize – ₹1500 or exciting goodies",
+          "3rd Prize – ₹1000 or exciting goodies"
+        ],
+        event_head: {
+          name: "Khushi Singh Parihar",
+          contact: "9005893880"
+        }
+      }
+    ]
+  },
+  // {
+  //   category_title: "Web Development",
+  //   events: [
+      
+  //   ]
+  // },
+  // {
+  //   category_title: "Cybersecurity",
+  //   events: [
+      
+  //   ]
+  // },
+  // {
+  //   category_title: "Typing & Accuracy",
+  //   events: [
+      
+  //   ]
+  // },
+  {
+    category_title: "Chemistry & Science",
+    events: [
+      {
+        title: "ChemVenture (Presentation Competition)",
+        description:
+          "A professional-skill-based presentation event for chemistry enthusiasts to showcase innovative ideas.",
+        icon: "BookOpen",
+        duration: "10 minutes (8 min presentation + 2 min Q&A)",
+        format: "Teams of 2",
+        platform: "Offline (CM311)",
+        entry_fee: "₹49",
+        poster: "/images/events/chem_venture.png",
+        scoring: [
+          "Content quality and visuals",
+          "Delivery and professionalism"
+        ],
+        rules: [
+          "Teams of 2 only",
+          "Exceeding time leads to penalty",
+          "Judges’ decision is final"
+        ],
+        prizes: ["₹2000 or exciting goodies"],
+        event_head: {
+          name: "Priya Verma",
+          contact: "8957683450"
+        }
+      },
+      {
+        title: "Mystery Flask (Chemistry Challenge)",
+        description:
+          "A fun chemistry-based lab challenge where teams must solve experimental tasks.",
+        icon: "FlaskConical",
+        duration: "TBD",
+        format: "Teams of 2",
+        platform: "Offline (Chem Lab)",
+        entry_fee: "₹49",
+        poster: "/images/events/mystry_flask.png",
+        scoring: [
+          "Performance in tasks",
+          "Accuracy and teamwork"
+        ],
+        rules: [
+          "Handle materials responsibly",
+          "Arrive 20 minutes early",
+          "College ID mandatory"
+        ],
+        prizes: ["₹2000 or exciting goodies"],
+        event_head: {
+          name: "Ankita Sharma",
+          contact: "9578654123"
+        }
+      },
+      {
+        title: "CHEMCAD Workshop (IIChE Collaboration)",
+        description:
+          "A professional workshop introducing participants to CHEMCAD for chemical process simulation.",
+        icon: "BookOpen",
+        duration: "TBD",
+        format: "Individual / Team of 2",
+        platform: "Offline (UIET Campus)",
+        entry_fee: "₹49",
+        poster: "/images/events/chem_cad.jpeg",
+        scoring: ["Participation only (certificate awarded)"],
+        rules: [
+          "Maintain discipline and decorum",
+          "Carry college ID",
+          "Misconduct may lead to suspension"
+        ],
+        prizes: ["Participation certificates for all"],
+        event_head: {
+          name: "Vishal Kumar",
+          contact: "8319043568"
+        }
+      }
+    ]
   },
   {
-    title: "WebGenesis (Web Development Hackathon)",
-    description:
-      "Teams build a website on a revealed theme. Judges score on creativity, functionality and theme fit.",
-    format: "Teams of 3–4",
-    duration: "3 hours build + 2 hours showcase",
-    platform: "Local / Browser-based",
-    scoring: [
-      "Creativity & originality",
-      "Resemblance to the theme",
-      "Functionality & responsiveness",
-      "Overall polish (UX & visuals)",
-    ],
-    rules: ["AI & internet allowed", "Theme revealed at start of event"],
-    icon: Zap,
-    color: "from-purple-500 to-pink-500",
-    glow: "shadow-glow-magenta",
+    category_title: "Design & Creativity",
+    events: [
+      {
+        title: "Jewellery Design – Adorn the Idea",
+        description:
+          "A design contest to create handmade wearable jewelry based on a given theme.",
+        icon: "Sparkles",
+        duration: "TBD",
+        format: "Individual",
+        platform: "Offline (Display)",
+        entry_fee: "₹49",
+        poster: "/images/events/jwellery_design.jpeg",
+        scoring: [
+          "Creativity and theme relevance",
+          "Craftsmanship and neatness"
+        ],
+        rules: [
+          "Only allowed materials permitted",
+          "No pre-made or digital designs",
+          "Brief concept note submission required"
+        ],
+        prizes: ["₹2000 or exciting goodies"],
+        event_head: {
+          name: "Aditi Sharma",
+          contact: "9897456210"
+        }
+      }
+    ]
   },
-  {
-    title: "CipherConquest (CTF Challenge)",
-    description:
-      "Capture-the-Flag style cybersecurity challenges across multiple domains.",
-    format: "Individual / Team (TBD)",
-    duration: "3 hours",
-    platform: "CTF platform (scoreboard)",
-    scoring: ["Number of flags solved", "Time to solve (faster solves rank higher)"],
-    rules: ["AI & internet allowed", "Sharing flags between teams prohibited"],
-    icon: ShieldCheck,
-    color: "from-amber-500 to-orange-500",
-    glow: "shadow-glow-gold",
-  },
-  {
-    title: "TechWhiz (CS Fundamentals Quiz)",
-    description:
-      "A live quiz testing computer science fundamentals with automatic leaderboard scoring.",
-    format: "Individual",
-    duration: "1 hour",
-    platform: "Quiz platform / Live system",
-    scoring: ["Correct answers + time taken", "Faster correct answers rank higher"],
-    rules: ["No googling or external help", "No sharing of answers"],
-    icon: BookOpen,
-    color: "from-cyan-500 to-teal-500",
-    glow: "shadow-glow-cyan",
-  },
-  {
-    title: "TypeMatrix (Typing Test)",
-    description:
-      "60-second typing rounds testing speed and accuracy. Highest WPM with accuracy wins.",
-    format: "Individual",
-    duration: "1 hour (sessions)",
-    platform: "Browser-based typing tool",
-    scoring: ["60s timed test", "Higher WPM while maintaining accuracy wins"],
-    rules: ["Accuracy matters — mistakes reduce effective score"],
-    icon: Activity,
-    color: "from-green-400 to-teal-500",
-    glow: "shadow-glow-green",
-  },
+  // {
+  //   category_title: "Workshops",
+  //   events: [
+      
+  //   ]
+  // }
 ];
 
-const Events: React.FC = () => {
-  const ref = useRef<HTMLElement | null>(null);
-  const isInView = useInView(ref, { once: true, margin: "-120px" });
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [menuOpen, setMenuOpen] = useState(false);
+const gradients = [
+  "from-cyan-500 to-blue-600",
+  "from-purple-500 to-pink-500",
+  "from-amber-400 to-orange-500",
+  "from-green-500 to-emerald-600",
+  "from-red-500 to-rose-600",
+  "from-indigo-500 to-violet-600",
+];
 
-  useEffect(() => {
-    document.body.style.overflow = selectedIndex !== null ? "hidden" : "";
-  }, [selectedIndex]);
-
-  const openEvent = (index: number) => setSelectedIndex(index);
-  const closeEvent = () => setSelectedIndex(null);
-
-  const menuItems = [
-    { name: "Institutions", id: "/#institutions" },
-    { name: "Sponsors", id: "/#sponsors" },
-    { name: "Competitions", id: "/#competitions" },
-    { name: "Schedule", id: "/#schedule" },
-    { name: "About", id: "/about" },
-  ];
+function Events() {
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+  const getGradient = (i: number) => gradients[i % gradients.length];
 
   return (
-    <section ref={ref as any} className="relative py-20 sm:py-28 overflow-hidden" id="competitions">
-      {/* 🌈 Navbar */}
-      <div className="absolute top-4 left-0 right-0 flex justify-between items-center px-6 z-30">
-        <h2 className="font-audiowide text-2xl sm:text-3xl text-primary drop-shadow-lg cursor-pointer">
-          <a href="/">TechMart</a>
-        </h2>
-
-        {/* Mobile Hamburger */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden p-2 rounded-lg bg-background/40 backdrop-blur-md border border-primary/20 hover:bg-background/60 transition"
-        >
-          {menuOpen ? <X className="w-6 h-6 text-primary" /> : <Menu className="w-6 h-6 text-primary" />}
-        </button>
-
-        {/* Desktop Menu */}
-        <nav className="hidden md:flex gap-8 text-lg font-orbitron text-foreground/90">
-          {menuItems.map((item) => (
-            <a
-              key={item.id}
-              href={`${item.id}`}
-              className="hover:text-primary transition-colors"
-            >
-              {item.name}
-            </a>
-          ))}
-        </nav>
+    <div className="min-h-screen bg-[#0b0c10] py-16 px-4 sm:px-6 lg:px-8">
+      <Navbar />
+      <div className="text-center mb-16">
+        <h1 className="font-orbitron text-6xl font-black mb-4 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
+          EVENTS
+        </h1>
       </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-16 left-4 right-4 z-20 bg-background/80 backdrop-blur-lg border border-primary/20 rounded-2xl p-6 shadow-lg md:hidden"
-          >
-            <ul className="flex flex-col items-center gap-4 text-lg font-orbitron text-foreground">
-              {menuItems.map((item) => (
-                <li key={item.id}>
-                  <a
-                    href={item.id}
-                    className="hover:text-primary transition-colors"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div className="max-w-7xl mx-auto">
+        {eventData.map((cat, ci) => (
+          <div key={ci} className="mb-20">
+            <h2
+              className={`font-orbitron text-3xl font-bold mb-8 bg-gradient-to-r ${getGradient(
+                ci
+              )} bg-clip-text text-transparent`}
+            >
+              {cat.category_title}
+            </h2>
 
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/6 to-transparent pointer-events-none" />
-
-      <div className="relative container mx-auto px-4 sm:px-6 mt-20">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-14 sm:mb-16"
-        >
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-orbitron mb-4">
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
-              Events & Competitions
-            </span>
-          </h2>
-          <p className="text-base sm:text-lg text-gray-400 max-w-3xl mx-auto px-2">
-            A curated lineup of coding, security, web, quiz, and typing events — built to challenge and inspire.
-          </p>
-        </motion.div>
-
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-          {EVENTS.map((event, idx) => {
-            const Icon = event.icon;
-            return (
-              <motion.div
-                key={event.title}
-                initial={{ opacity: 0, y: 20, scale: 0.97 }}
-                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                transition={{ duration: 0.55, delay: idx * 0.08 }}
-                whileHover={{ scale: 1.03 }}
-                className="flex"
-              >
-                <button
-                  onClick={() => openEvent(idx)}
-                  className={`group relative flex flex-col justify-between w-full h-full text-left rounded-2xl p-6 bg-gradient-to-b from-gray-900/60 to-gray-900/40 border border-gray-800 hover:border-cyan-500 transition-all duration-300 ${event.glow}`}
-                >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {cat.events.map((ev, ei) => {
+                const Icon = iconMap[ev.icon as keyof typeof iconMap];
+                const gradient = getGradient(ci + ei);
+                return (
                   <div
-                    className={`absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity ${event.color}`}
-                    style={{ mixBlendMode: "screen" }}
-                  />
-                  <div className="relative z-10 flex flex-col gap-3">
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-white/5 to-white/3 ring-1 ring-white/5">
-                      <Icon className="w-6 h-6 sm:w-7 sm:h-7 text-cyan-300" />
+                    key={ei}
+                    onClick={() => setSelectedEvent(ev)}
+                    className="group relative cursor-pointer hover:scale-105 transition-transform duration-300"
+                  >
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-r ${gradient} rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition-all`}
+                    />
+                    <div className="relative bg-gray-900/70 border border-gray-800 rounded-2xl p-6 backdrop-blur-xl hover:border-cyan-500/50 transition-all h-full">
+                      <div
+                        className={`w-14 h-14 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center mb-4`}
+                      >
+                        <Icon className="w-7 h-7 text-white" />
+                      </div>
+                      <h3 className="text-xl font-orbitron text-white mb-2">
+                        {ev.title}
+                      </h3>
+                      <p className="text-gray-400 text-sm mb-4">
+                        {ev.description}
+                      </p>
+                      <div className="flex gap-3 text-xs text-cyan-300">
+                        <span className="bg-gray-800/50 px-3 py-1 rounded-full">
+                          {ev.duration}
+                        </span>
+                        <span className="bg-gray-800/50 px-3 py-1 rounded-full">
+                          {ev.format}
+                        </span>
+                      </div>
                     </div>
-                    <h3 className="text-lg sm:text-xl font-semibold text-white">{event.title}</h3>
-                    <p className="text-gray-400 text-sm sm:text-base flex-1">{event.description}</p>
                   </div>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <span className="text-[11px] sm:text-xs px-2 py-1 bg-white/3 rounded-full text-white/90">
-                      {event.format}
-                    </span>
-                    <span className="text-[11px] sm:text-xs px-2 py-1 bg-white/3 rounded-full text-white/90">
-                      {event.duration}
-                    </span>
-                  </div>
-                </button>
-              </motion.div>
-            );
-          })}
-        </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </div>
 
-      {/* Modal */}
-      <AnimatePresence>
-        {selectedIndex !== null && (
-          <motion.div
-            key="modal"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6"
-            onClick={closeEvent}
+      {selectedEvent && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          onClick={() => setSelectedEvent(null)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative bg-gray-900 border border-cyan-500/40 rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
           >
-            <motion.div
-              className="absolute inset-0 bg-black/80 backdrop-blur-md"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            />
-            <motion.div
-              initial={{ y: 30, scale: 0.98, opacity: 0 }}
-              animate={{ y: 0, scale: 1, opacity: 1 }}
-              exit={{ y: 30, scale: 0.98, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 250, damping: 25 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative z-10 w-full max-w-3xl bg-gray-900/95 border border-cyan-500/30 rounded-2xl shadow-2xl p-5 sm:p-8 max-h-[90vh] overflow-y-auto"
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedEvent(null)}
+              className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center bg-red-500/20 hover:bg-red-500/40 border border-red-500 rounded-full transition-all duration-200"
             >
-              <button
-                onClick={closeEvent}
-                className="absolute top-4 right-4 sm:top-5 sm:right-5 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-gray-800/60 border border-gray-700 hover:bg-gray-800/80 transition"
-              >
-                <X className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-300" />
-              </button>
+              <X className="w-5 h-5 text-red-400" />
+            </button>
 
-              {/* Modal Content */}
-              <div className="grid gap-5 sm:gap-6">
-                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 text-center sm:text-left">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-white/5 to-white/3 flex items-center justify-center border border-white/5 flex-shrink-0">
-                    {React.createElement(EVENTS[selectedIndex].icon, {
-                      className: "w-8 h-8 sm:w-9 sm:h-9 text-cyan-300",
-                    })}
-                  </div>
-                  <div>
-                    <h2 className="text-2xl sm:text-3xl font-bold text-white">
-                      {EVENTS[selectedIndex].title}
-                    </h2>
-                    <p className="text-sm sm:text-base text-gray-400 mt-1">
-                      {EVENTS[selectedIndex].description}
-                    </p>
-                    <div className="mt-3 flex flex-wrap gap-2 justify-center sm:justify-start">
-                      <span className="text-[11px] sm:text-xs px-2 py-1 bg-white/3 rounded-full text-white/90">
-                        {EVENTS[selectedIndex].format}
-                      </span>
-                      <span className="text-[11px] sm:text-xs px-2 py-1 bg-white/3 rounded-full text-white/90">
-                        {EVENTS[selectedIndex].duration}
-                      </span>
-                      {EVENTS[selectedIndex].platform && (
-                        <span className="text-[11px] sm:text-xs px-2 py-1 bg-white/3 rounded-full text-white/90">
-                          Platform: {EVENTS[selectedIndex].platform}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
+            {/* Poster - Full height scrollable */}
+            <div className="w-full bg-gray-800 rounded-t-3xl overflow-hidden">
+              <img
+                src={selectedEvent.poster}
+                alt={selectedEvent.title}
+                className="w-full h-auto object-contain"
+              />
+            </div>
 
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div>
-                    <h3 className="text-lg font-semibold text-white mb-3">Scoring</h3>
-                    <ul className="list-disc list-inside text-gray-300 space-y-2 text-sm sm:text-base">
-                      {EVENTS[selectedIndex].scoring.map((s, i) => (
-                        <li key={i}>{s}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-white mb-3">Rules</h3>
-                    <ul className="list-disc list-inside text-gray-300 space-y-2 text-sm sm:text-base">
-                      {EVENTS[selectedIndex].rules.map((r, i) => (
-                        <li key={i}>{r}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+            {/* Details */}
+            <div className="p-8 space-y-6">
+              <h2 className="font-orbitron text-3xl font-bold text-white bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                {selectedEvent.title}
+              </h2>
+              <p className="text-gray-300">{selectedEvent.description}</p>
 
-                <div className="pt-4 border-t border-white/5 flex flex-col sm:flex-row gap-3 sm:gap-0 items-center justify-between">
-                  <div className="flex items-center gap-2 text-sm text-cyan-300">
-                    <Sparkles className="w-4 h-4" />
-                    <span>Get ready to compete & innovate!</span>
-                  </div>
-                  <button
-                    onClick={() =>
-                      alert(`Registration link for: ${EVENTS[selectedIndex].title}`)
-                    }
-                    className="px-5 py-2 rounded-lg bg-cyan-500/90 hover:bg-cyan-500 text-black font-semibold transition text-sm sm:text-base"
-                  >
-                    Register
-                  </button>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Detail label="Duration" value={selectedEvent.duration} />
+                <Detail label="Format" value={selectedEvent.format} />
+                <Detail label="Platform" value={selectedEvent.platform} />
+                <Detail label="Entry Fee" value={selectedEvent.entry_fee} />
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </section>
+
+              <Section title="Prizes" data={selectedEvent.prizes} />
+              <Section title="Scoring Criteria" data={selectedEvent.scoring} />
+              <Section title="Rules & Guidelines" data={selectedEvent.rules} />
+
+              <div className="border-t border-gray-700 pt-4">
+                <p className="font-orbitron text-lg text-cyan-400">Event Head</p>
+                <p className="text-white">{selectedEvent.event_head.name}</p>
+                <p className="text-gray-400">{selectedEvent.event_head.contact}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
-};
+}
+
+const Detail = ({ label, value }: { label: string; value: string }) => (
+  <div className="bg-gray-800/60 border border-gray-700 rounded-xl p-4">
+    <p className="text-cyan-400 font-orbitron text-sm">{label}</p>
+    <p className="text-white">{value}</p>
+  </div>
+);
+
+const Section = ({ title, data }: { title: string; data: string[] }) => (
+  <div>
+    <h3 className="font-orbitron text-xl text-cyan-400 mb-3">{title}</h3>
+    <ul className="space-y-2 text-gray-300 text-sm">
+      {data.map((d, i) => (
+        <li key={i} className="flex gap-2 items-start">
+          <span className="text-cyan-400">▹</span>
+          {d}
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 
 export default Events;

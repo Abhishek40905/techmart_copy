@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Sparkles, Rocket, Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import Navbar from './Navbar';
 
 const AnimatedSphere = () => {
   return (
@@ -23,15 +24,7 @@ const AnimatedSphere = () => {
 const Hero = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Menu items with corresponding section IDs
-  const menuItems = [
-    { name: 'Institutions', id: '#institutions' },
-    { name: 'Sponsors', id: '#sponsors' },
-    { name: 'Competitions', id: '/events' },
-    { name: 'Schedule', id: '#schedule' },
-    { name: 'About', id: '/about' },
-  ];
-
+  
   return (
     <section
       id="hero"
@@ -53,58 +46,7 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-glow animate-pulse-glow" />
 
       {/* Navbar */}
-      <div className="absolute top-4 left-0 right-0 flex justify-between items-center px-6 z-20">
-        <h2 className="font-audiowide text-2xl sm:text-3xl text-primary drop-shadow-lg cursor-pointer">
-          <a href="/">TechMart</a>
-        </h2>
-
-        {/* Hamburger for Mobile */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden p-2 rounded-lg bg-background/40 backdrop-blur-md border border-primary/20 hover:bg-background/60 transition"
-        >
-          {menuOpen ? <X className="w-6 h-6 text-primary" /> : <Menu className="w-6 h-6 text-primary" />}
-        </button>
-
-        {/* Desktop Menu */}
-        <nav className="hidden md:flex gap-8 text-lg font-orbitron text-foreground/90">
-          {menuItems.map((item) => (
-            <a
-              key={item.id}
-              href={`${item.id}`}
-              className="hover:text-primary transition-colors"
-            >
-              {item.name}
-            </a>
-          ))}
-        </nav>
-      </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-16 left-4 right-4 z-20 bg-background/80 backdrop-blur-lg border border-primary/20 rounded-2xl p-6 shadow-lg md:hidden"
-          >
-            <ul className="flex flex-col items-center gap-4 text-lg font-orbitron text-foreground">
-              {menuItems.map((item) => (
-                <li key={item.id}>
-                  <a
-                    href={`${item.id}`}
-                    className="hover:text-primary transition-colors"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
+     <Navbar/>
 
       {/* Hero Content */}
       <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center justify-center space-y-6 sm:space-y-8 lg:space-y-10">
