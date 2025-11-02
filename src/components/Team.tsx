@@ -4,46 +4,115 @@ import Navbar from "./Navbar";
 
 const categories = [
   {
-    title: " Core Organizers",
+    title: "Core Organizers",
     gradient: "from-cyan-400 to-blue-500",
     members: [
-      { name: "Nikil", role: "IT", image: "/images/organizers/nikhil.jpeg" },
-      { name: "Shikhar Dwivedi", role: "CSE", image: "/images/organizers/shikhar.jpeg" },
-      { name: "Jatin Gupta", role: "MCA", image: "/images/organizers/jatin.jpeg" },
+      { name: "Shikhar Dwivedi", role: "Student Convener (CSE - 3rd Year)", image: "/images/organizers/shikhar.jpeg" },
+      { name: "Nikhil Kumar", role: "Student General Secretary (IT - 3rd Year)", image: "/images/organizers/nikhil.jpeg" },
+      { name: "Vaishnavi Pal", role: "Student Joint Secretary (CHE - 2nd Year)", image: "/images/organizers/vaishnavi_pal.jpeg" },
+      { name: "Tarun Rai", role: "Student Treasurer (CSE - 3rd Year)", image: "/images/organizers/tarun_rai.jpeg" },
     ],
   },
   {
-    title: " Technical & Innovation Team",
-    gradient: "from-teal-400 to-emerald-500",
+    title: "Computer Events Committee",
+    gradient: "from-cyan-400 to-sky-500",
     members: [
-      { name: "Vishal Singh", role: "ECE", image: "/images/organizers/vishal.jpeg" },
-      { name: "Nav Srijan", role: "CSE-AI", image: "/images/organizers/nav.jpeg" },
+      { name: "Jatin Gupta", role: "Secretary (MCA - 1st Year)", image: "/images/organizers/jatin.jpeg" },
+      { name: "Nav Srijan", role: "Secretary (AI - 3rd Year)", image: "/images/organizers/nav.jpeg" },
     ],
   },
   {
-    title: " Creative & Design Team",
-    gradient: "from-pink-400 to-rose-500",
+    title: "Electronics Events Committee",
+    gradient: "from-green-400 to-lime-500",
     members: [
-      { name: "Mohd Athar", role: "B.Design", image: "/images/organizers/athar.jpeg" },
-      { name: "Sanskriti Srivastava", role: "B.Voc", image: "/images/organizers/sanskriti.jpeg" },
+      { name: "Vishal Singh", role: "Secretary (ECE - 3rd Year)", image: "/images/organizers/vishal.jpeg" },
     ],
   },
   {
-    title: " Management & Operations Team",
+    title: "Management Committee",
     gradient: "from-violet-400 to-purple-500",
     members: [
-      { name: "Shivam Pal", role: "CHE", image: "/images/organizers/shivam.jpeg" },
-      { name: "Divyaraaj Tomar", role: "MEE", image: "/images/organizers/divyaraaj.jpeg" },
+      { name: "Anshul Rana", role: "Secretary (CSE - 3rd Year)", image: "/images/organizers/anshul.jpeg" },
     ],
   },
   {
-    title: " Outreach & PR Team",
+    title: "Technical Committee",
+    gradient: "from-teal-400 to-emerald-500",
+    members: [
+      { name: "Naman Singh", role: "Secretary (AI - 3rd Year)", image: "/images/organizers/naman.jpeg" },
+      { name: "Nivesh Pratap Singh", role: "Secretary (AI - 3rd Year)", image: "/images/organizers/nivesh.jpeg" },
+    ],
+  },
+  {
+    title: "Inauguration & Valedictory Committee",
+    gradient: "from-amber-400 to-yellow-500",
+    members: [
+      { name: "Shivani Shukla", role: "Secretary (IT - 3rd Year)", image: "/images/organizers/shivani.jpeg" },
+      { name: "Arpan Singh", role: "Secretary (CSE - 3rd Year)", image: "/images/organizers/arpan.jpeg" },
+    ],
+  },
+  
+  
+  {
+    title: "Chemical Events Committee",
+    gradient: "from-blue-400 to-indigo-500",
+    members: [
+      { name: "Harsh Katiyar", role: "Head (CHE - 2nd Year)", image: "/images/organizers/harsh.jpeg" },
+    ],
+  },
+  {
+    title: "Mechanical Events Committee",
+    gradient: "from-rose-400 to-red-500",
+    members: [
+      { name: "Divyaraj Tomar", role: "Secretary (MEE - 3rd Year)", image: "/images/organizers/divyaraaj.jpeg" },
+    ],
+  },
+  {
+    title: "MSME Events Committee",
+    gradient: "from-indigo-400 to-purple-500",
+    members: [
+      { name: "Lucky Kumar", role: "Secretary (MSME - 2nd Year)", image: "/images/organizers/lucky.jpeg" },
+    ],
+  },
+  {
+    title: "B.Voc. Events Committee",
+    gradient: "from-pink-400 to-rose-500",
+    members: [
+      { name: "Mohd. Athar", role: "Secretary (B.Des. - 1st Year)", image: "/images/organizers/athar.jpeg" },
+    ],
+  },
+  {
+    title: "Sponsorship & Outreach Committee",
     gradient: "from-orange-400 to-amber-500",
     members: [
-      { name: "Shivani Shukla", role: "IT", image: "/images/organizers/shivani.jpeg" },
+      { name: "Ojasva Raj", role: "Secretary (CSE - 3rd Year)", image: "/images/organizers/ojasva.jpeg" },
+      { name: "Chanchal", role: "Secretary (B.Voc. - 1st Year)", image: "/images/organizers/chanchal.jpeg" },
+    ],
+  },
+  {
+    title: "Media & PR Committee",
+    gradient: "from-yellow-400 to-orange-500",
+    members: [
+      { name: "Satish Kr. Sharma", role: "Secretary (CSE - 2nd Year)", image: "/images/organizers/satish.jpeg" },
+    ],
+  },
+  {
+    title: "Creativity & Decoration Committee",
+    gradient: "from-pink-400 to-fuchsia-500",
+    members: [
+      { name: "Sanskriti Srivastava", role: "Secretary (B.Des. - 2nd Year)", image: "/images/organizers/sanskriti.jpeg" },
+    ],
+  },
+  {
+    title: "Discipline Committee",
+    gradient: "from-red-400 to-rose-500",
+    members: [
+      { name: "Madhusudan Dubey", role: "Secretary (MCA - 1st Year)", image: "/images/organizers/madhusudan.jpeg" },
+      { name: "Abhay Kr. Kanaujiya", role: "Secretary (MCA - 1st Year)", image: "/images/organizers/abhay.jpeg" },
     ],
   },
 ];
+
 
 export default function Teams() {
   const sectionRef = useRef<HTMLDivElement>(null);

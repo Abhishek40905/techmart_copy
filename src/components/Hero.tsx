@@ -100,7 +100,7 @@ const Hero = () => {
               <Rocket className="mr-2" />
               Register Now
             </Button></a>
-            <a href="/events">
+            <a href="https://konfhub.com/">
               <Button
               
               size="lg"
