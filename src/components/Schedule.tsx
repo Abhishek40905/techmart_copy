@@ -12,13 +12,12 @@ const Schedule = () => {
       { time: "09:00 AM", title: "Opening Ceremony", venue: "Main Auditorium" },
       { time: "11:00 AM", title: "Hackathon Begins", venue: "Tech Lab" },
       { time: "02:00 PM", title: "Tech Talk: Future of AI", venue: "Hall A" },
-      { time: "06:00 PM", title: "Cultural Night", venue: "Open Arena" },
+  
     ]},
     { day: "Day 2", date: "NOV 16", events: [
       { time: "10:00 AM", title: "Robo Wars Quarter Finals", venue: "Arena B" },
       { time: "01:00 PM", title: "AI Art Contest", venue: "Exhibition Hall" },
       { time: "04:00 PM", title: "Startup Pitching", venue: "Innovation Center" },
-      { time: "08:00 PM", title: "DJ Night", venue: "Main Stage" },
     ]}
   ];
 
