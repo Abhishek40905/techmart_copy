@@ -7,7 +7,7 @@ import {
   BookOpen,
   FlaskConical,
   Activity,
-  Building2, // ✅ Added missing icon
+  Building2,
   X,
 } from "lucide-react";
 import Navbar from "./Navbar";
@@ -45,7 +45,7 @@ const iconMap = {
   BookOpen,
   FlaskConical,
   Activity,
-  Building2, // ✅ Added to map
+  Building2,
 };
 
 const eventData: Category[] = [
@@ -243,7 +243,10 @@ const eventData: Category[] = [
         platform: "Offline (Display)",
         entry_fee: "₹100",
         poster: "/images/events/jwellery_desgin.jpg",
-        scoring: ["Creativity and theme relevance", "Craftsmanship and neatness"],
+        scoring: [
+          "Creativity and theme relevance",
+          "Craftsmanship and neatness",
+        ],
         rules: [
           "Only allowed materials permitted",
           "Desgin any wearable jwellery peice",
@@ -291,7 +294,7 @@ const eventData: Category[] = [
         format: "Individual or Team (up to 4 members)",
         platform: "Offline (On-site Competition)",
         entry_fee: "₹100",
-        poster: "/images/events/structure_tower_challenge.jpg",
+        poster: "/images/events/build_to_the_sky.jpeg",
         scoring: [
           "Height of the structure",
           "Stability and strength",
@@ -399,7 +402,7 @@ function Events() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative bg-gray-900 border border-cyan-500/40 rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+            className="relative bg-gray-900 border border-cyan-500/40 rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-hidden shadow-2xl"
           >
             {/* Close Button */}
             <button
@@ -409,37 +412,44 @@ function Events() {
               <X className="w-5 h-5 text-red-400" />
             </button>
 
-            {/* Poster */}
-            <div className="w-full bg-gray-800 rounded-t-3xl overflow-hidden">
-              <img
-                src={selectedEvent.poster}
-                alt={selectedEvent.title}
-                className="w-full h-auto object-contain"
-              />
-            </div>
+            {/* New Layout: Info Left, Poster Right */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start p-6 md:p-10">
+              {/* Left - Details */}
+              <div className="space-y-6 overflow-y-auto max-h-[75vh] pr-4">
+                <h2 className="font-orbitron text-3xl font-bold text-white bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                  {selectedEvent.title}
+                </h2>
+                <p className="text-gray-300">{selectedEvent.description}</p>
 
-            {/* Details */}
-            <div className="p-8 space-y-6">
-              <h2 className="font-orbitron text-3xl font-bold text-white bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                {selectedEvent.title}
-              </h2>
-              <p className="text-gray-300">{selectedEvent.description}</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <Detail label="Duration" value={selectedEvent.duration} />
+                  <Detail label="Format" value={selectedEvent.format} />
+                  <Detail label="Platform" value={selectedEvent.platform} />
+                  <Detail label="Entry Fee" value={selectedEvent.entry_fee} />
+                </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Detail label="Duration" value={selectedEvent.duration} />
-                <Detail label="Format" value={selectedEvent.format} />
-                <Detail label="Platform" value={selectedEvent.platform} />
-                <Detail label="Entry Fee" value={selectedEvent.entry_fee} />
+                <Section title="Prizes" data={selectedEvent.prizes} />
+                <Section title="Scoring Criteria" data={selectedEvent.scoring} />
+                <Section title="Rules & Guidelines" data={selectedEvent.rules} />
+
+                <div className="border-t border-gray-700 pt-4">
+                  <p className="font-orbitron text-lg text-cyan-400">
+                    Event Head
+                  </p>
+                  <p className="text-white">{selectedEvent.event_head.name}</p>
+                  <p className="text-gray-400">
+                    {selectedEvent.event_head.contact}
+                  </p>
+                </div>
               </div>
 
-              <Section title="Prizes" data={selectedEvent.prizes} />
-              <Section title="Scoring Criteria" data={selectedEvent.scoring} />
-              <Section title="Rules & Guidelines" data={selectedEvent.rules} />
-
-              <div className="border-t border-gray-700 pt-4">
-                <p className="font-orbitron text-lg text-cyan-400">Event Head</p>
-                <p className="text-white">{selectedEvent.event_head.name}</p>
-                <p className="text-gray-400">{selectedEvent.event_head.contact}</p>
+              {/* Right - Poster */}
+              <div className="flex justify-center items-center bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 shadow-lg">
+                <img
+                  src={selectedEvent.poster}
+                  alt={selectedEvent.title}
+                  className="w-full h-full object-contain"
+                />
               </div>
             </div>
           </div>

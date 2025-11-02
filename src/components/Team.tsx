@@ -10,7 +10,7 @@ const categories = [
       { name: "Shikhar Dwivedi", role: "Student Convener (CSE - 3rd Year)", image: "/images/organizers/shikhar.jpeg" },
       { name: "Nikhil Kumar", role: "Student General Secretary (IT - 3rd Year)", image: "/images/organizers/nikhil.jpeg" },
       { name: "Vaishnavi Pal", role: "Student Joint Secretary (CHE - 2nd Year)", image: "/images/organizers/vaishnavi_pal.jpeg" },
-      { name: "Tarun Rai", role: "Student Treasurer (CSE - 3rd Year)", image: "/images/organizers/tarun_rai.jpeg" },
+      { name: "Tarun Rai", role: "Student Treasurer (CSE - 3rd Year)", image: "/images/organizers/tarun_rai.jpg" },
     ],
   },
   {
@@ -29,12 +29,13 @@ const categories = [
     ],
   },
   {
-    title: "Management Committee",
-    gradient: "from-violet-400 to-purple-500",
+    title: "Mechanical Events Committee",
+    gradient: "from-rose-400 to-red-500",
     members: [
-      { name: "Anshul Rana", role: "Secretary (CSE - 3rd Year)", image: "/images/organizers/anshul.jpeg" },
+      { name: "Divyaraj Tomar", role: "Secretary (MEE - 3rd Year)", image: "/images/organizers/divyaraaj.jpeg" },
     ],
   },
+  
   {
     title: "Technical Committee",
     gradient: "from-teal-400 to-emerald-500",
@@ -60,13 +61,7 @@ const categories = [
       { name: "Harsh Katiyar", role: "Head (CHE - 2nd Year)", image: "/images/organizers/harsh.jpeg" },
     ],
   },
-  {
-    title: "Mechanical Events Committee",
-    gradient: "from-rose-400 to-red-500",
-    members: [
-      { name: "Divyaraj Tomar", role: "Secretary (MEE - 3rd Year)", image: "/images/organizers/divyaraaj.jpeg" },
-    ],
-  },
+  
   {
     title: "MSME Events Committee",
     gradient: "from-indigo-400 to-purple-500",
@@ -108,7 +103,14 @@ const categories = [
     gradient: "from-red-400 to-rose-500",
     members: [
       { name: "Madhusudan Dubey", role: "Secretary (MCA - 1st Year)", image: "/images/organizers/madhusudhan_dubey.jpeg" },
-      { name: "Abhay Kr. Kanaujiya", role: "Secretary (MCA - 1st Year)", image: "/images/organizers/abhay.jpeg" },
+      { name: "Abhay Kr. Kanaujiya", role: "Secretary (MCA - 1st Year)", image: "/images/organizers/abhay_kanaujiya.jpeg" },
+    ],
+  },
+  {
+    title: "Management Committee",
+    gradient: "from-violet-400 to-purple-500",
+    members: [
+      { name: "Anshul Rana", role: "Secretary (CSE - 3rd Year)", image: "/images/organizers/anshul.jpeg" },
     ],
   },
 ];
