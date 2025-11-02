@@ -9,6 +9,7 @@ import CustomCursor from '@/components/CustomCursor';
 import PartnerInstitutions from '@/components/logos';
 import Sponsors from '@/components/sponsors';
 import Leadership from '@/components/Leadership';
+import FormspreeForm from '@/components/Contact2';
 
 const Index = () => {
   useEffect(() => {
@@ -41,7 +42,7 @@ const Index = () => {
       {/* <Events /> */}
       <Schedule />
       {/* <About /> */}
-      <Contact />
+      <FormspreeForm />
       
       {/* Footer */}
       <footer className="relative border-t border-border py-12 bg-card/30 backdrop-blur-sm">

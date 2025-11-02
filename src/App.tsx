@@ -8,7 +8,6 @@ import NotFound from "./pages/NotFound";
 import About from "./components/About";
 import Events from "./components/Events";
 import Team from "./components/Team";
-
 const queryClient = new QueryClient();
 
 const App = () => (

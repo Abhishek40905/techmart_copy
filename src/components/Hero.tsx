@@ -93,14 +93,14 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.8 }}
           >
-            <a href="/events"><Button
+            <a href="https://konfhub.com/"><Button
               size="lg"
               className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-glow-cyan px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-orbitron w-full sm:w-auto"
             >
               <Rocket className="mr-2" />
               Register Now
             </Button></a>
-            <a href="https://konfhub.com/">
+            <a href="/events">
               <Button
               
               size="lg"
