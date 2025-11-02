@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 
 const categories = [
   {
-    title: "Core Organizers",
+    title: "Organizing Committee",
     gradient: "from-cyan-400 to-blue-500",
     members: [
       { name: "Shikhar Dwivedi", role: "Student Convener (CSE - 3rd Year)", image: "/images/organizers/shikhar.jpeg" },
@@ -39,7 +39,7 @@ const categories = [
     title: "Technical Committee",
     gradient: "from-teal-400 to-emerald-500",
     members: [
-      { name: "Naman Singh", role: "Secretary (AI - 3rd Year)", image: "/images/organizers/naman.jpeg" },
+      { name: "Naman Singh", role: "Secretary (AI - 3rd Year)", image: "/images/organizers/naman_singh.jpeg" },
       { name: "Nivesh Pratap Singh", role: "Secretary (AI - 3rd Year)", image: "/images/organizers/nivesh.jpeg" },
     ],
   },
@@ -107,7 +107,7 @@ const categories = [
     title: "Discipline Committee",
     gradient: "from-red-400 to-rose-500",
     members: [
-      { name: "Madhusudan Dubey", role: "Secretary (MCA - 1st Year)", image: "/images/organizers/madhusudan.jpeg" },
+      { name: "Madhusudan Dubey", role: "Secretary (MCA - 1st Year)", image: "/images/organizers/madhusudhan_dubey.jpeg" },
       { name: "Abhay Kr. Kanaujiya", role: "Secretary (MCA - 1st Year)", image: "/images/organizers/abhay.jpeg" },
     ],
   },

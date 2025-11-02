@@ -7,6 +7,7 @@ import {
   BookOpen,
   FlaskConical,
   Activity,
+  Building2, // ✅ Added missing icon
   X,
 } from "lucide-react";
 import Navbar from "./Navbar";
@@ -44,6 +45,7 @@ const iconMap = {
   BookOpen,
   FlaskConical,
   Activity,
+  Building2, // ✅ Added to map
 };
 
 const eventData: Category[] = [
@@ -55,51 +57,52 @@ const eventData: Category[] = [
         description:
           "A programming challenge to test your coding logic, speed, and problem-solving accuracy.",
         icon: "Code",
-        duration: "3 hours",
+        duration: "5 (2+3) hours",
         format: "Individual",
-        platform: "Online / Code Platform",
+        platform: "Codeforces (In LAB)",
         entry_fee: "₹49",
         poster: "/images/events/cp_poster.jpeg",
         scoring: [
           "Based on number of correct solutions",
-          "Time and accuracy used as tie-breakers"
+          "Time and accuracy used as tie-breakers",
         ],
         rules: [
           "No plagiarism or collaboration allowed",
           "Internet restricted to official platform",
-          "Violation of rules leads to disqualification"
+          "Violation of rules leads to disqualification",
         ],
-        prizes: ["₹2000 or exciting goodies"],
+        prizes: ["Cash prizes and exciting goodies"],
         event_head: {
-          name: "Tushar Singh",
-          contact: "9935738343"
-        }
+          name: "Nikhil Singh",
+          contact: "9873988194",
+        },
       },
       {
-        title: "Web Dev Contest",
+        title: "Web Genesis (Web Developement hackathon)",
         description:
           "A creative web development challenge where teams design functional, theme-based websites.",
         icon: "Zap",
-        duration: "5 hours (3h build + 2h showcase)",
-        format: "Teams of 3–4",
+        duration: "48 hours (48h build(at your place) + showcase(at the venue))",
+        format: "Teams of 2",
         platform: "Local / Browser-based",
-        entry_fee: "₹49",
+        entry_fee: "₹99",
         poster: "/images/events/typing_poster.jpeg",
         scoring: [
           "Creativity and originality",
           "Theme resemblance and responsiveness",
-          "Functionality and visual polish"
+          "Functionality and visual polish",
         ],
         rules: [
-          "Theme revealed at start of event",
+          "Themes will be revealed 48 hours before the event.",
+          "You'll bring your built solutions, which will be evaluated on the aforementioned parameters.",
           "AI tools and internet allowed",
-          "Copied or template-based work leads to disqualification"
+          "Copied or template-based work leads to disqualification",
         ],
-        prizes: ["₹2000 or exciting goodies"],
+        prizes: ["Cash prizes and exciting goodies"],
         event_head: {
-          name: "Ayushi Chaudhary",
-          contact: "9118886404"
-        }
+          name: "Ashutosh Mishra",
+          contact: "9454751887",
+        },
       },
       {
         title: "CipherConquest (CTF Challenge)",
@@ -108,23 +111,23 @@ const eventData: Category[] = [
         icon: "ShieldCheck",
         duration: "3 hours",
         format: "Individual",
-        platform: "CTFd Platform",
+        platform: "CTF Platform",
         entry_fee: "Free",
         poster: "/images/events/cipher_conquest.jpeg",
         scoring: [
           "Number of flags solved",
-          "Time-based ranking for tie-breaks"
+          "Time-based ranking for tie-breaks",
         ],
         rules: [
           "Flag sharing strictly prohibited",
           "Respectful environment mandatory",
-          "Report unintended vulnerabilities to organizers"
+          "Report unintended vulnerabilities to organizers",
         ],
-        prizes: ["₹2000 or exciting goodies"],
+        prizes: ["Cash prizes and exciting goodies"],
         event_head: {
           name: "Aman Singh",
-          contact: "9039308629"
-        }
+          contact: "9039308629",
+        },
       },
       {
         title: "TypeMatrix",
@@ -138,43 +141,21 @@ const eventData: Category[] = [
         poster: "/images/events/typing_poster.jpeg",
         scoring: [
           "Final Score = (WPM × Accuracy) / 100",
-          "Higher accuracy wins tie-breakers"
+          "Higher accuracy wins tie-breakers",
         ],
         rules: [
           "Only registered participants allowed",
           "External typing tools/scripts prohibited",
-          "Plagiarism or tab switching = disqualification"
+          "Plagiarism or tab switching = disqualification",
         ],
-        prizes: [
-          "1st Prize – ₹2000 or exciting goodies",
-          "2nd Prize – ₹1500 or exciting goodies",
-          "3rd Prize – ₹1000 or exciting goodies"
-        ],
+        prizes: ["Cash prizes and exciting goodies"],
         event_head: {
           name: "Khushi Singh Parihar",
-          contact: "9005893880"
-        }
-      }
-    ]
+          contact: "9005893880",
+        },
+      },
+    ],
   },
-  // {
-  //   category_title: "Web Development",
-  //   events: [
-      
-  //   ]
-  // },
-  // {
-  //   category_title: "Cybersecurity",
-  //   events: [
-      
-  //   ]
-  // },
-  // {
-  //   category_title: "Typing & Accuracy",
-  //   events: [
-      
-  //   ]
-  // },
   {
     category_title: "Chemistry & Science",
     events: [
@@ -186,22 +167,22 @@ const eventData: Category[] = [
         duration: "10 minutes (8 min presentation + 2 min Q&A)",
         format: "Teams of 2",
         platform: "Offline (CM311)",
-        entry_fee: "₹49",
+        entry_fee: "₹49 per participant",
         poster: "/images/events/chem_venture.png",
         scoring: [
           "Content quality and visuals",
-          "Delivery and professionalism"
+          "Delivery and professionalism",
         ],
         rules: [
           "Teams of 2 only",
           "Exceeding time leads to penalty",
-          "Judges’ decision is final"
+          "Judges’ decision is final",
         ],
-        prizes: ["₹2000 or exciting goodies"],
+        prizes: ["₹1000 or exciting goodies"],
         event_head: {
-          name: "Priya Verma",
-          contact: "8957683450"
-        }
+          name: "Ansh sharma",
+          contact: "9451203397",
+        },
       },
       {
         title: "Mystery Flask (Chemistry Challenge)",
@@ -211,22 +192,19 @@ const eventData: Category[] = [
         duration: "TBD",
         format: "Teams of 2",
         platform: "Offline (Chem Lab)",
-        entry_fee: "₹49",
+        entry_fee: "₹49 per person",
         poster: "/images/events/mystry_flask.png",
-        scoring: [
-          "Performance in tasks",
-          "Accuracy and teamwork"
-        ],
+        scoring: ["Performance in tasks", "Accuracy and teamwork"],
         rules: [
           "Handle materials responsibly",
           "Arrive 20 minutes early",
-          "College ID mandatory"
+          "College ID mandatory",
         ],
-        prizes: ["₹2000 or exciting goodies"],
+        prizes: ["trophies and certificates"],
         event_head: {
-          name: "Ankita Sharma",
-          contact: "9578654123"
-        }
+          name: "Akharw mishra",
+          contact: "9236797959",
+        },
       },
       {
         title: "CHEMCAD Workshop (IIChE Collaboration)",
@@ -236,21 +214,21 @@ const eventData: Category[] = [
         duration: "TBD",
         format: "Individual / Team of 2",
         platform: "Offline (UIET Campus)",
-        entry_fee: "₹49",
+        entry_fee: "₹149 per person",
         poster: "/images/events/chem_cad.jpeg",
         scoring: ["Participation only (certificate awarded)"],
         rules: [
           "Maintain discipline and decorum",
           "Carry college ID",
-          "Misconduct may lead to suspension"
+          "Misconduct may lead to suspension",
         ],
         prizes: ["Participation certificates for all"],
         event_head: {
-          name: "Vishal Kumar",
-          contact: "8319043568"
-        }
-      }
-    ]
+          name: "Ambar pandey",
+          contact: "7565952518",
+        },
+      },
+    ],
   },
   {
     category_title: "Design & Creativity",
@@ -260,34 +238,83 @@ const eventData: Category[] = [
         description:
           "A design contest to create handmade wearable jewelry based on a given theme.",
         icon: "Sparkles",
-        duration: "TBD",
+        duration: "2 hrs",
         format: "Individual",
         platform: "Offline (Display)",
-        entry_fee: "₹49",
-        poster: "/images/events/jwellery_design.jpeg",
-        scoring: [
-          "Creativity and theme relevance",
-          "Craftsmanship and neatness"
-        ],
+        entry_fee: "₹100",
+        poster: "/images/events/jwellery_desgin.jpg",
+        scoring: ["Creativity and theme relevance", "Craftsmanship and neatness"],
         rules: [
           "Only allowed materials permitted",
+          "Desgin any wearable jwellery peice",
           "No pre-made or digital designs",
-          "Brief concept note submission required"
+          "Brief concept note submission required",
         ],
-        prizes: ["₹2000 or exciting goodies"],
+        prizes: ["₹3000 or exciting goodies"],
         event_head: {
-          name: "Aditi Sharma",
-          contact: "9897456210"
-        }
-      }
-    ]
+          name: "Nikita verma",
+          contact: "9555234521",
+        },
+      },
+      {
+        title: "Logo Design (Hand-drawn on Paper)",
+        description:
+          "A creative design contest where participants craft original hand-drawn logos based on an assigned theme. The focus is on simplicity, creativity, and originality—without digital tools or software.",
+        icon: "Sparkles",
+        duration: "TBD",
+        format: "Individual",
+        platform: "Offline (Hand-drawn on paper)",
+        entry_fee: "₹100",
+        poster: "/images/events/logo_design.jpeg",
+        scoring: [
+          "Creativity and relevance to the assigned theme",
+          "Originality and clarity of concept",
+          "Neatness and presentation quality",
+        ],
+        rules: [
+          "Design must be made only on the assigned theme.",
+          "No use of digital tools or software; hand-drawn entries only.",
+          "Maintain simplicity and creativity in design.",
+        ],
+        prizes: ["₹3000 or exciting goodies"],
+        event_head: {
+          name: "Mohd Azfar",
+          contact: "+91 7379196862",
+        },
+      },
+      {
+        title: "Structure Tower Challenge – Build to the Sky",
+        description:
+          "A fun and creative design challenge where participants construct the tallest and most stable freestanding tower using only the materials provided. The event tests your sense of structure, balance, creativity, and teamwork.",
+        icon: "Building2",
+        duration: "45–60 minutes",
+        format: "Individual or Team (up to 4 members)",
+        platform: "Offline (On-site Competition)",
+        entry_fee: "₹100",
+        poster: "/images/events/structure_tower_challenge.jpg",
+        scoring: [
+          "Height of the structure",
+          "Stability and strength",
+          "Creativity and design aesthetics",
+          "Teamwork and planning",
+        ],
+        rules: [
+          "You can participate alone or in a team of up to 4 members.",
+          "All materials will be provided by organizers. Outside materials or tools are not allowed.",
+          "You will get 45–60 minutes to build your tower.",
+          "The tower must be free-standing (should stand on its own). Only provided materials may be used.",
+        ],
+        prizes: [
+          "Winning Categories: Tallest Tower, Most Creative Design, Most Stable Structure",
+          "₹2000 or exciting goodies",
+        ],
+        event_head: {
+          name: "Parnika",
+          contact: "8090033330",
+        },
+      },
+    ],
   },
-  // {
-  //   category_title: "Workshops",
-  //   events: [
-      
-  //   ]
-  // }
 ];
 
 const gradients = [
@@ -382,7 +409,7 @@ function Events() {
               <X className="w-5 h-5 text-red-400" />
             </button>
 
-            {/* Poster - Full height scrollable */}
+            {/* Poster */}
             <div className="w-full bg-gray-800 rounded-t-3xl overflow-hidden">
               <img
                 src={selectedEvent.poster}
